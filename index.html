@@ -43,20 +43,19 @@
     If you do not wish to share this data, you can safely remove the
     javascript code below.
     -->
-    <script type="text/javascript">
-      //<!--AUTO_INSERT_GOOGLE_ANALYTICS_JS_HERE-->
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-20555581-2', 'auto');
-      ga('set', 'page', '/via-2.0.0.html');
-      ga('send', 'pageview');
-    </script>
 
     <!-- CSS style definition -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@4.0.0/dist/simplebar.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+ <script src="https://cdn.jsdelivr.net/npm/simplebar@4.0.0/dist/simplebar.min.js"></script>
     <style type="text/css">
+
       body { min-width:200px; padding:0; margin:0; font-family:sans-serif; }
       * { box-sizing: border-box; }
       input[type=text] { border:1px solid #cccccc; margin:0.6rem 0; padding:0.2rem 0.4rem; }
@@ -129,12 +128,12 @@
       #leftsidebar_show_button:hover { color:red; cursor: pointer; }
 
       /* Left sidebar accordion */
-      button.leftsidebar_accordion { font-size:large; background-color:#f2f2f2; cursor:pointer; padding:0.5em 0.5em; width:100%; text-align:left; border:0; outline:none; }
+      button.leftsidebar_accordion { font-size:large; background-color:#007bff; cursor:pointer; padding:0.5em 0.5em; width:100%; text-align:left; border:0; outline:none; }
       button.leftsidebar_accordion:focus { outline: none; }
-      button.leftsidebar_accordion.active, button.leftsidebar_accordion:hover { background-color: #e6e6e6; }
-      button.leftsidebar_accordion:after { content:'\02795'; color:#4d4d4d; float:right; }
-      button.leftsidebar_accordion.active:after { content: '\2796'; }
-      .leftsidebar_accordion_panel { display:none; padding:0 0.5em; font-size:small; border-right:2px solid #f2f2f2; border-bottom:2px solid #f2f2f2; }
+      button.leftsidebar_accordion.active, button.leftsidebar_accordion:hover { background-color: #007bff ; }
+      button.leftsidebar_accordion:after { content:'\f067'; color:#fff; float:right; font-weight: 900; font-family: 'Font Awesome\ 5 Free'; }
+      button.leftsidebar_accordion.active:after { content: '\f068'; color:#fff; font-weight: 900; font-family: 'Font Awesome\ 5 Free'; }
+      .leftsidebar_accordion_panel { display:none; padding:0 0.5em; font-size:small; border-right:2px solid #007bff; border-bottom:2px solid #007bff; }
       .leftsidebar_accordion_panel.show { display:block; }
 
       /* Keyboard shortcut panel */
@@ -196,7 +195,7 @@
       #annotation_editor .col label { vertical-align:middle; font-size:inherit; }
       #annotation_editor .col textarea { border:0.1em solid #cccccc; padding:0; margin:0; font-size:inherit; background-color:#ffffff; }
       #annotation_editor .col textarea:focus { border:0.1em dashed #cccccc; }
-      #annotation_editor .col span { display:block; }
+      #annotation_editor .col span { display:inline; }
       #annotation_editor .col horizontal_container { display:inline-block; }
 
       #annotation_editor .col .img_options { display:inline; }
@@ -224,7 +223,7 @@
       #region_info { font-size:0.8em; margin-bottom:0.4em; }
 
       /* Loaded image list shown in leftsidebar panel */
-      #img_fn_list    { display:none; font-size:small; overflow:scroll; min-height:10rem; max-height:25rem; }
+      #img_fn_list    { display:none; font-size:medium; overflow:scroll; min-height:10rem; max-height:25rem; }
       #img_fn_list ul { position:relative; line-height:1.3em; margin:0; padding:0; list-style-type:none;}
       #img_fn_list li { white-space:nowrap; display:block; padding:0 0.4rem; }
       #img_fn_list li:hover   { background-color:#d5e5ff; cursor:pointer; }
@@ -415,29 +414,30 @@
       <!-- here, a child div with id="annotation_editor" is added by javascript -->
     </div>
 
-    <div class="top_panel" id="ui_top_panel">
+    <div class="top_panel" id="ui_top_panel" style="height:50px">
       <!-- menu bar -->
       <div class="menubar">
         <ul>
-          <li onclick="show_home_panel()" style="cursor:pointer;">Home</li>
-          <li>Project
+          <!--<li onclick="show_home_panel()" style="cursor:pointer;" >Home</li>-->
+          <li><button type="button" class="btn btn-light">Project</button>
             <ul>
-              <li onclick="project_open_select_project_file()" title="Load a VIA project (from a JSON file)">Load</li>
-              <li onclick="project_save_with_confirm()" title="Save this VIA project (as a JSON file)">Save</li>
-              <li onclick="settings_panel_toggle()" title="Show/edit project settings">Settings</li>
-              <li class="submenu_divider"></li>
+              <li style="display:none;" onclick="project_open_select_project_file()" title="Load a VIA project (from a JSON file)">Load</li>
+              <li style="display:none;" onclick="project_save_with_confirm()" title="Save this VIA project (as a JSON file)">Save</li>
+              <li style="display:none;" onclick="settings_panel_toggle()" title="Show/edit project settings">Settings</li>
+              <li style="display:none;" class="submenu_divider"></li>
               <li onclick="sel_local_images()" title="Add images locally stored in this computer">Add local files</li>
               <li onclick="project_file_add_url_with_input()" title="Add images from a web URL (e.g. http://www.robots.ox.ac.uk/~vgg/software/via/images/swan.jpg)">Add files from URL</li>
-              <li onclick="project_file_add_abs_path_with_input()" title="Add images using absolute path of file (e.g. /home/abhishek/image1.jpg)">Add file using absolute path</li>
-              <li onclick="sel_local_data_file('files_url')" title="Add images from a list of web url or absolute path stored in a text file (one url or path per line)">Add url or path from text file</li>
-              <li onclick="project_file_remove_with_confirm()" title="Remove selected file (i.e. file currently being shown)">Remove file</li>
-              <li class="submenu_divider"></li>
-              <li onclick="sel_local_data_file('attributes')" title="Import region and file attributes from a JSON file">Import region/file attributes</li>
-              <li onclick="project_save_attributes()" title="Export region and file attributes to a JSON file">Export region/file attributes</li>
+              <li style="display:none;" onclick="project_file_add_abs_path_with_input()" title="Add images using absolute path of file (e.g. /home/abhishek/image1.jpg)">Add file using absolute path</li>
+              <li style="display:none;" onclick="sel_local_data_file('files_url')" title="Add images from a list of web url or absolute path stored in a text file (one url or path per line)">Add url or path from text file</li>
+              <li style="display:none;" onclick="project_file_remove_with_confirm()" title="Remove selected file (i.e. file currently being shown)">Remove file</li>
+              <li style="display:none;" class="submenu_divider"></li>
+              <li style="display:none;" onclick="sel_local_data_file('attributes')" title="Import region and file attributes from a JSON file">Import region/file attributes</li>
+              <li style="display:none;" onclick="project_save_attributes()" title="Export region and file attributes to a JSON file">Export region/file attributes</li>
             </ul>
           </li>
 
-          <li>Annotation
+          <li><button type="button" class="btn btn-light">Annotation</button>
+
             <ul>
               <li onclick="download_all_region_data('csv')" title="Export annotations to a CSV file">Export Annotations (as csv)</li>
               <li onclick="download_all_region_data('json')" title="Export annotaitons to a JSON file">Export Annotations (as json)</li>
@@ -450,7 +450,7 @@
             </ul>
           </li>
 
-          <li>View
+          <li style="display:none;">View
             <ul>
               <li onclick="image_grid_toggle()" title="Toggle between single image view and image grid view">Toggle image grid view</li>
               <li onclick="leftsidebar_toggle()" title="Show or hide the sidebar shown in left hand side">Toggle left sidebar</li>
@@ -465,7 +465,7 @@
             </ul>
           </li>
 
-          <li>Help
+          <li style="display:none;">Help
             <ul>
               <li onclick="set_display_area_content(VIA_DISPLAY_AREA_CONTENT_NAME.PAGE_GETTING_STARTED)" title="Show a guide to get started with this application">Getting Started</li>
               <li title="Visit the project page for this application"><a href="http://www.robots.ox.ac.uk/~vgg/software/via/" target="_blank">VGG Project Page</a></li>
@@ -481,18 +481,18 @@
 
       <!-- Shortcut toolbar -->
       <div class="toolbar">
-        <svg onclick="project_open_select_project_file()" viewbox="0 0 24 24"><use xlink:href="#icon_open"></use><title>Open Project</title></svg>
+        <svg style="display:none;" onclick="project_open_select_project_file()" viewbox="0 0 24 24"><use xlink:href="#icon_open"></use><title>Open Project</title></svg>
         <svg onclick="project_save_with_confirm()" viewbox="0 0 24 24"><use xlink:href="#icon_save"></use><title>Save Project</title></svg>
-        <svg onclick="settings_panel_toggle()" viewbox="0 0 24 24"><use xlink:href="#icon_settings"></use><title>Update Project Settings</title></svg>
+        <svg style="display:none;" onclick="settings_panel_toggle()" viewbox="0 0 24 24"><use xlink:href="#icon_settings"></use><title>Update Project Settings</title></svg>
         <!--
         <svg onclick="" viewbox="0 0 24 24"><use xlink:href="#icon_checkbox"></use><title>Locate Files</title></svg>
         -->
 
-        <svg onclick="sel_local_data_file('annotations')" style="margin-left:1rem;" viewbox="0 0 24 24"><use xlink:href="#icon_fileupload"></use><title>Import Annotations from CSV</title></svg>
+        <svg style="display:none;" onclick="sel_local_data_file('annotations')" style="margin-left:1rem;" viewbox="0 0 24 24"><use xlink:href="#icon_fileupload"></use><title>Import Annotations from CSV</title></svg>
         <svg onclick="download_all_region_data('csv')" viewbox="0 0 24 24"><use xlink:href="#icon_filedownload"></use><title>Download Annotations as CSV</title></svg>
 
         <svg onclick="image_grid_toggle()" id="toolbar_image_grid_toggle" style="margin-left:1rem;" viewbox="0 0 24 24"><use xlink:href="#icon_gridon"></use><title>Switch to Image Grid View</title></svg>
-        <svg onclick="annotation_editor_toggle_all_regions_editor()" viewbox="0 0 24 24"><use xlink:href="#icon_insertcomment"></use><title>Toggle Annotation Editor</title></svg>
+        <svg style="display:none;" onclick="annotation_editor_toggle_all_regions_editor()" viewbox="0 0 24 24"><use xlink:href="#icon_insertcomment"></use><title>Toggle Annotation Editor</title></svg>
 
         <svg onclick="move_to_prev_image()" style="margin-left:1rem;" viewbox="0 0 24 24"><use xlink:href="#icon_prev"></use><title>Previous</title></svg>
         <svg onclick="toggle_img_fn_list_visibility()" viewbox="0 0 24 24"><use xlink:href="#icon_list"></use><title>Toggle Filename List</title></svg>
@@ -526,7 +526,7 @@
           <span class="text_button" onclick="leftsidebar_toggle()" title="Show/hide this toolbar panel">&ltrif;</span>
         </div>
 
-        <button class="leftsidebar_accordion active">Region Shape</button>
+        <button type="button" class="btn btn-primary leftsidebar_accordion active">Region Shape</button>
         <div class="leftsidebar_accordion_panel show">
           <ul class="region_shape">
             <li id="region_shape_rect" class="selected" onclick="select_region_shape('rect')" title="Rectangle (Shortcut key 1)"><svg height="32" viewbox="0 0 32 32"><use xlink:href="#shape_rectangle"></use></svg></li>
@@ -540,40 +540,42 @@
         </div>
 
         <!-- Project -->
-        <button class="leftsidebar_accordion active" id="project_panel_title">Project</button>
+        <button type="button" class="btn btn-primary leftsidebar_accordion active" id="project_panel_title">Project</button>
         <div class="leftsidebar_accordion_panel show" id="img_fn_list_panel">
           <div id="project_info_panel">
             <div class="row">
-              <span class="col"><label for="project_name">Name: </label></span>
-              <span class="col"><input type="text" value="" onchange="project_on_name_update(this)" id="project_name" title="VIA project name"></span>
+              <!--<span class="col"><label for="project_name"></label></span>-->
+              <span class="col"><input type="text" value="" onchange="project_on_name_update(this)" id="project_name" title="VIA project name" style="display:none"></span>
             </div>
           </div>
           <div id="project_tools_panel">
-            <div class="button_panel" style="margin:0.1rem 0;" >
-              <select style="width:48%" id="filelist_preset_filters_list" onchange="img_fn_list_onpresetfilter_select()" title="Filter file list using predefined filters">
+            <div class="button_panel" >
+              <select class="form-control" id="filelist_preset_filters_list" onchange="img_fn_list_onpresetfilter_select()" title="Filter file list using predefined filters">
                 <option value="all">All files</option>
                 <option value="files_without_region">Show files without regions</option>
                 <option value="files_missing_region_annotations">Show files missing region annotations</option>
                 <option value="files_missing_file_annotations">Show files missing file annotations</option>
                 <option value="files_error_loading">Files that could not be loaded</option>
-                <option value="regex">Regular Expression</option>
+                <option value="regex">Search</option>
               </select>
-              <input style="width:50%" type="text" placeholder="regular expression" oninput="img_fn_list_onregex()" id="img_fn_list_regex" title="Filter using regular expression">
+              <div class="form-group">
+                <input oninput="img_fn_list_onregex()" id="img_fn_list_regex" type="text" class="form-control" placeholder="Search Filename">
+              </div>
             </div>
           </div>
-          <div id="img_fn_list"></div>
-          <p>
+          <div id="img_fn_list" style="height:100px" data-simplebar data-simplebar-auto-hide="false"></div>
+          <!--<p>
             <div class="button_panel">
               <span class="button" onclick="sel_local_images()" title="Add new file from local disk">Add Files</span>
               <span class="button" onclick="project_file_add_url_with_input()" title="Add new file using URL">Add URL</span>
               <span class="button" onclick="project_file_remove_with_confirm()" title="Remove selected file (i.e. file currently being shown) from project">Remove</span>
             </div>
-          </p>
+          </p>-->
         </div>
 
-        <!-- Attributes -->
-        <button class="leftsidebar_accordion" id="attributes_editor_panel_title">Attributes</button>
-        <div class="leftsidebar_accordion_panel" id="attributes_editor_panel">
+        <!--Attributes -->
+        <button type="button" class="btn btn-primary leftsidebar_accordion" id="attributes_editor_panel_title" style="display:none;">Attributes</button>
+        <div class="leftsidebar_accordion_panel" id="attributes_editor_panel" style="display:none;">
           <div class="button_panel" style="padding:1rem 0;">
             <span class="text_button" onclick="show_region_attributes_update_panel()" id="button_show_region_attributes" title="Show region attributes">Region Attributes</span>
             <span class="text_button" onclick="show_file_attributes_update_panel()" id="button_show_file_attributes" title="Show file attributes">File Attributes</span>
@@ -595,7 +597,7 @@
           </div>
         </div>
 
-        <button class="leftsidebar_accordion">Keyboard Shortcuts</button>
+        <button type="button" class="btn btn-primary leftsidebar_accordion">Keyboard Shortcuts</button>
         <div class="leftsidebar_accordion_panel">
           <div style="display:block; text-align:center; padding:1rem;">Available only on image focus</div>
           <table>
@@ -6784,14 +6786,14 @@ function edit_file_metadata_in_annotation_editor() {
 
 function annotation_editor_update_header_html() {
   var head = document.createElement('div');
-  head.setAttribute('class', 'row');
+  head.setAttribute('class', 'rowx');
   head.setAttribute('id', 'annotation_editor_header');
 
   if ( _via_metadata_being_updated === 'region' ) {
-    var rid_col = document.createElement('span');
-    rid_col.setAttribute('class', 'col');
-    rid_col.innerHTML = '';
-    head.appendChild(rid_col);
+  //  var rid_col = document.createElement('span');
+  //  rid_col.setAttribute('class', 'col');
+    //rid_col.innerHTML = '';
+  //  head.appendChild(rid_col);
   }
 
   if ( _via_metadata_being_updated === 'file' ) {
@@ -6881,7 +6883,7 @@ function annotation_editor_add_row(row_id) {
 
 function annotation_editor_get_metadata_row_html(row_id) {
   var row = document.createElement('div');
-  row.setAttribute('class', 'row');
+  row.setAttribute('class', 'rowx');
   row.setAttribute('id', 'ae_' + _via_metadata_being_updated + '_' + row_id);
 
   if ( _via_metadata_being_updated === 'region' ) {
@@ -6893,8 +6895,8 @@ function annotation_editor_get_metadata_row_html(row_id) {
       rid.innerHTML = 'Grouped regions in ' + _via_image_grid_selected_img_index_list.length + ' files';
       break;
     case VIA_DISPLAY_AREA_CONTENT_NAME.IMAGE:
-      rid.setAttribute('class', 'col id');
-      rid.innerHTML = (row_id + 1);
+      /*rid.setAttribute('class', 'col id');
+      rid.innerHTML = (row_id + 1);*/
       break;
     }
     row.appendChild(rid);
@@ -10445,6 +10447,7 @@ if ( ! _via_is_debug_mode ) {
       //<!--AUTO_INSERT_VIA_TEST_JS_HERE-->
     </script>
 
+
     <!-- scripts code debugging
     <script src="via.js"></script>    -->
 
@@ -10458,5 +10461,7 @@ if ( ! _via_is_debug_mode ) {
     <script src="./tests/_via_test.js"></script>
     <script src="./tests/_via_test_region.js"></script>
     -->
+
   </body>
+
 </html>
