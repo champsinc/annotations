@@ -440,7 +440,7 @@
 
             <ul>
               <li onclick="download_all_region_data('csv')" title="Export annotations to a CSV file">Export Annotations (as csv)</li>
-              <li onclick="download_all_region_data('json')" title="Export annotaitons to a JSON file">Export Annotations (as json)</li>
+              <li onclick="download_all_region_data('json')" title="Export annotations to a JSON file">Export Annotations (as json)</li>
               <li onclick="" class="submenu_divider"></li>
               <li onclick="sel_local_data_file('annotations')" title="Import annotations from a CSV file">Import Annotations (from csv)</li>
               <li onclick="sel_local_data_file('annotations')" title="Import annotations from a JSON file">Import Annotations (from json)</li>
@@ -1443,11 +1443,11 @@ function run_script(){
     success: function(data) {
         var obj = JSON.parse(data);
         var i;
-        var attributes_json = obj[0].attributes;
+        var attributes_json = obj[1].attributes;
         //console.log(attributes_json);
-        for ( i = 0; i < obj[1].image_data.length; ++i ){
-          var data = obj[1].image_data[i].data.toString();
-          var name = obj[1].image_data[i].name.toString();
+        for ( i = 0; i < obj[0].image_data.length; ++i ){
+          var data = obj[0].image_data[i].data.toString();
+          var name = obj[0].image_data[i].name.toString();
           _via_face_demo_img.push(data);
           _via_face_demo_img_filename.push(name);
         }
