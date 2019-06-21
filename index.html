@@ -425,8 +425,8 @@
               <li style="display:none;" onclick="project_save_with_confirm()" title="Save this VIA project (as a JSON file)">Save</li>
               <li style="display:none;" onclick="settings_panel_toggle()" title="Show/edit project settings">Settings</li>
               <li style="display:none;" class="submenu_divider"></li>
-              <li onclick="sel_local_images()" title="Add images locally stored in this computer">Add local files</li>
-              <li onclick="project_file_add_url_with_input()" title="Add images from a web URL (e.g. http://www.robots.ox.ac.uk/~vgg/software/via/images/swan.jpg)">Add files from URL</li>
+              <li onclick="add_more_files()" title="Add images locally stored in this computer">Add local files</li><!--sel_local_images()-->
+              <li style="display:none;" onclick="project_file_add_url_with_input()" title="Add images from a web URL (e.g. http://www.robots.ox.ac.uk/~vgg/software/via/images/swan.jpg)">Add files from URL</li>
               <li style="display:none;" onclick="project_file_add_abs_path_with_input()" title="Add images using absolute path of file (e.g. /home/abhishek/image1.jpg)">Add file using absolute path</li>
               <li style="display:none;" onclick="sel_local_data_file('files_url')" title="Add images from a list of web url or absolute path stored in a text file (one url or path per line)">Add url or path from text file</li>
               <li onclick="project_file_remove_with_confirm()" title="Remove selected file (i.e. file currently being shown)">Remove Selected file</li>
@@ -439,10 +439,10 @@
           <li><button type="button" class="btn btn-light">Annotation</button>
 
             <ul>
-              <li onclick="download_all_region_data('csv')" title="Export annotations to a CSV file">Export Annotations (as csv)</li>
+              <li style="display:none;" onclick="download_all_region_data('csv')" title="Export annotations to a CSV file">Export Annotations (as csv)</li>
               <li onclick="download_all_region_data('json')" title="Export annotations to a JSON file">Export Annotations (as json)</li>
               <li onclick="" class="submenu_divider"></li>
-              <li onclick="sel_local_data_file('annotations')" title="Import annotations from a CSV file">Import Annotations (from csv)</li>
+              <li style="display:none;" onclick="sel_local_data_file('annotations')" title="Import annotations from a CSV file">Import Annotations (from csv)</li>
               <li onclick="sel_local_data_file('annotations')" title="Import annotations from a JSON file">Import Annotations (from json)</li>
               <li class="submenu_divider"></li>
               <li onclick="show_annotation_data()" title="Show a preview of annotations (opens in a new browser windows)">Preview Annotations</li>
@@ -456,7 +456,7 @@
             <ul>
               <li onclick="image_grid_toggle()" title="Toggle between single image view and image grid view">Toggle image grid view</li>
               <li onclick="leftsidebar_toggle()" title="Show or hide the sidebar shown in left hand side">Toggle left sidebar</li>
-<li onclick="toggle_img_fn_list_visibility()" title="Show or hide a panel to update annotations corresponding to file and region">Toggle image filename list</li>
+              <li onclick="toggle_img_fn_list_visibility()" title="Show or hide a panel to update annotations corresponding to file and region">Toggle image filename list</li>
               <li class="submenu_divider"></li>
               <li onclick="toggle_attributes_editor()" title="Show or hide a panel to update file and region attributes">Toggle attributes editor</li>
               <li onclick="annotation_editor_toggle_all_regions_editor()" title="Show or hide a panel to update annotations corresponding to file and region">Toggle annotation editor (Space)</li>
@@ -484,14 +484,14 @@
       <!-- Shortcut toolbar -->
       <div class="toolbar">
         <svg style="display:none;" onclick="project_open_select_project_file()" viewbox="0 0 24 24"><use xlink:href="#icon_open"></use><title>Open Project</title></svg>
-        <svg onclick="project_save_with_confirm()" viewbox="0 0 24 24"><use xlink:href="#icon_save"></use><title>Save Project</title></svg>
+        <svg style="display:none;" onclick="project_save_with_confirm()" viewbox="0 0 24 24"><use xlink:href="#icon_save"></use><title>Save Project</title></svg>
         <svg style="display:none;" onclick="settings_panel_toggle()" viewbox="0 0 24 24"><use xlink:href="#icon_settings"></use><title>Update Project Settings</title></svg>
         <!--
         <svg onclick="" viewbox="0 0 24 24"><use xlink:href="#icon_checkbox"></use><title>Locate Files</title></svg>
         -->
 
         <svg style="display:none;" onclick="sel_local_data_file('annotations')" style="margin-left:1rem;" viewbox="0 0 24 24"><use xlink:href="#icon_fileupload"></use><title>Import Annotations from CSV</title></svg>
-        <svg onclick="download_all_region_data('csv')" viewbox="0 0 24 24"><use xlink:href="#icon_filedownload"></use><title>Download Annotations as CSV</title></svg>
+        <svg style="display:none;" onclick="download_all_region_data('csv')" viewbox="0 0 24 24"><use xlink:href="#icon_filedownload"></use><title>Download Annotations as CSV</title></svg>
 
         <svg onclick="image_grid_toggle()" id="toolbar_image_grid_toggle" style="margin-left:1rem;" viewbox="0 0 24 24"><use xlink:href="#icon_gridon"></use><title>Switch to Image Grid View</title></svg>
         <svg style="display:none;" onclick="annotation_editor_toggle_all_regions_editor()" viewbox="0 0 24 24"><use xlink:href="#icon_insertcomment"></use><title>Toggle Annotation Editor</title></svg>
@@ -1451,7 +1451,6 @@ function run_script(){
         var obj = JSON.parse(data);
         var i;
         var attributes_json = obj[2].attributes;
-        //console.log(attributes_json);
         for ( i = 0; i < obj[1].image_data.length; ++i ){
           /*var data = obj[1].image_data[i].data.toString();
           var name = obj[1].image_data[i].name.toString();
@@ -1478,6 +1477,10 @@ function run_script(){
       cache: false,
     });
   }, 600000);
+}
+
+function add_more_files(){
+  window.location = "https://champsinc.github.io/stark/uploads/"+uniqueID;
 }
 
 function save_annotations_server(){
@@ -1948,10 +1951,19 @@ function import_annotations_from_json(data) {
         }
 
         // add regions only if they are present
-        if ( Object.keys(region_i.shape_attributes).length > 0 ||
-             Object.keys(region_i.region_attributes).length > 0 ) {
-          _via_img_metadata[img_id].regions.push(region_i);
-          region_import_count += 1;
+        if ( Object.keys(region_i.shape_attributes).length > 0 || Object.keys(region_i.region_attributes).length > 0 ) {
+          if(_via_img_metadata[img_id].regions.length == 0){
+            _via_img_metadata[img_id].regions.push(region_i);
+            region_import_count += 1;
+          }
+          else{
+            var all_regions = JSON.stringify(_via_img_metadata[img_id].regions);
+            var new_region = JSON.stringify(region_i);
+            if(!all_regions.includes(new_region)){
+              _via_img_metadata[img_id].regions.push(region_i);
+              region_import_count += 1;
+            }
+          }
         }
       }
     }
@@ -7985,8 +7997,8 @@ function project_file_add_local(event) {
       data.append('id', uniqueID);
       data.append('image', user_selected_images[i]);
       //add_file_ajax_call(data);
-      var filename = data;
-      //var filename = user_selected_images[i].name;
+      //var filename = data;
+      var filename = user_selected_images[i].name;
       var img_id1  = _via_get_image_id(filename, size);
       var img_id2  = _via_get_image_id(filename, -1);
       var img_id   = img_id1;
@@ -8001,7 +8013,6 @@ function project_file_add_local(event) {
         }
       } else {
         img_id = project_add_new_file(filename, size);
-        console.log("ID:"+img_id);
         _via_img_fileref[img_id] = user_selected_images[i];
         set_file_annotations_to_default_value(img_id);
       }
