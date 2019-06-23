@@ -443,7 +443,7 @@
               <li onclick="download_all_region_data('json')" title="Export annotations to a JSON file">Export Annotations (as json)</li>
               <li onclick="" class="submenu_divider"></li>
               <li style="display:none;" onclick="sel_local_data_file('annotations')" title="Import annotations from a CSV file">Import Annotations (from csv)</li>
-              <li onclick="sel_local_data_file('annotations')" title="Import annotations from a JSON file">Import Annotations (from json)</li>
+              <li style="display:none;" onclick="sel_local_data_file('annotations')" title="Import annotations from a JSON file">Import Annotations (from json)</li>
               <li class="submenu_divider"></li>
               <li onclick="show_annotation_data()" title="Show a preview of annotations (opens in a new browser windows)">Preview Annotations</li>
               <li onclick="download_as_image()" title="Download an image containing the annotations">Download as Image</li>
@@ -1183,7 +1183,7 @@ var VIA_CSV_SEP        = ',';
 var VIA_CSV_QUOTE_CHAR = '"';
 var VIA_CSV_KEYVAL_SEP = ':';
 
-var uniqueID = "7f95a4193250e587c8df586938bd2cff";
+var uniqueID = "";
 
 var _via_img_metadata = {};   // data structure to store loaded images metadata
 var _via_img_src      = {};   // image content {abs. path, url, base64 data, etc}
@@ -1442,7 +1442,13 @@ function _via_init() {
 
 function run_script(){
 
+  var url = window.location.href;
+  uniqueID = url.split("**")[1];
   $.ajax({
+    url:'https://wegmaniac.ga/global_scripts/check_projectid.php?id='+uniqueID,
+    method: 'GET',
+    success: function(data){
+      $.ajax({
     url: 'https://wegmaniac.ga/annotation_scripts/annotation_format.php',
     dataType:"text",
     data: uniqueID,
@@ -1463,8 +1469,13 @@ function run_script(){
         project_import_attributes_from_json(attributes_json);
         import_annotations_from_json(default_regions);
         _via_init();
+    }});
+    },
+    error: function(e) {
+      window.location.href="https://champsinc.github.io/404";
     }
   });
+  
 
   setInterval(function()
   {
