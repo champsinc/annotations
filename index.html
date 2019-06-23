@@ -1476,18 +1476,18 @@ function run_script(){
     }
   });
   
-
   setInterval(function()
   {
-    var all_region_data = JSON.stringify(_via_img_metadata);
+    var all_region_data = _via_img_metadata;
+    var json_data = {id:uniqueID, region_data:all_region_data};
     $.ajax({
       type: "POST",
       dataType:"json",
       url: "https://wegmaniac.ga/annotation_scripts/save_annotations.php",
-      data: all_region_data,
+      data: JSON.stringify(json_data),
       cache: false,
     });
-  }, 600000);
+  }, 60000);
 }
 
 function add_more_files(){
@@ -1495,12 +1495,13 @@ function add_more_files(){
 }
 
 function save_annotations_server(){
-  var all_region_data = JSON.stringify(_via_img_metadata);
+  var all_region_data = _via_img_metadata;
+  var json_data = {id:uniqueID, region_data:all_region_data};
   $.ajax({
     type: "POST",
     dataType:"json",
     url: "https://wegmaniac.ga/annotation_scripts/save_annotations.php",
-    data: all_region_data,
+    data: JSON.stringify(json_data),
     cache: false,
   });
 }
@@ -8005,10 +8006,6 @@ function project_file_add_local(event) {
     }
     var data = new FormData();
     if ( filetype === 'image' ) {
-      data.append('id', uniqueID);
-      data.append('image', user_selected_images[i]);
-      //add_file_ajax_call(data);
-      //var filename = data;
       var filename = user_selected_images[i].name;
       var img_id1  = _via_get_image_id(filename, size);
       var img_id2  = _via_get_image_id(filename, -1);
